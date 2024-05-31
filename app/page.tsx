@@ -1,32 +1,30 @@
-"use client";
+import { getServerSession } from "next-auth/next";
+import { redirect } from "next/navigation";
 
-import Image from "next/image";
-
+import { authOptions } from "@/app/api/auth/[...nextauth]";
 import Bomb from "@/components/bomb";
+import SignIn from "@/components/signIn";
 
-import { Button } from "@r-4bb1t/rabbit-ui";
+const checkCredentials = async () => {
+  const session = await getServerSession(authOptions);
 
-export default function Home() {
+  if (session) {
+    redirect("/new");
+  }
+
+  return session;
+};
+
+export default async function Home() {
+  await checkCredentials();
+
   return (
     <main className="pt-24 pb-12 px-8 min-h-screen flex flex-col items-center justify-between gap-4">
       <div className="italic text-lg">여기는 의상한거실...</div>
       <div className="w-full h-full flex items-center justify-center flex-col">
-        <Bomb src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnTWnYnu8TJHZf6AAVqY-y9kX6rkg9hsVpOQ&s" />
+        <Bomb />
       </div>
-      <Button
-        sz={"lg"}
-        className="w-full !bg-[#FEE500] hover:!bg-[#fecf00] !text-[rgba(0,0,0,0.85)] gap-2"
-      >
-        <div className="relative w-5 h-5">
-          <Image
-            src="/assets/kakao.svg"
-            layout="fill"
-            alt="kakao logo"
-            className="object-contain"
-          />
-        </div>
-        카카오 로그인
-      </Button>
+      <SignIn />
     </main>
   );
 }
