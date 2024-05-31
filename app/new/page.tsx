@@ -2,10 +2,6 @@
 
 import { useState } from "react";
 
-import { useRouter } from "next/navigation";
-
-import { useUser } from "@/store/useUser";
-
 import { Button, List, Select } from "@r-4bb1t/rabbit-ui";
 
 export default function Home() {
@@ -14,12 +10,12 @@ export default function Home() {
   const [startTime, setStartTime] = useState(hour);
   const [endTime, setEndTime] = useState(Math.min(hour + 6, 23));
 
-  const { user } = useUser();
+  /*  const { user } = useUser();
   const router = useRouter();
 
   if (!user) {
     router.push("/");
-  }
+  } */
 
   return (
     <main className="pt-24 pb-12 px-8 min-h-screen flex flex-col items-center justify-between gap-4">
