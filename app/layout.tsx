@@ -1,8 +1,8 @@
-"use client";
+import "./globals.css";
+
+import Logo from "@/components/Logo";
 
 import { Header, Layout } from "@r-4bb1t/rabbit-ui";
-import "./globals.css";
-import Logo from "@/components/Logo";
 
 export default function RootLayout({
   children,
