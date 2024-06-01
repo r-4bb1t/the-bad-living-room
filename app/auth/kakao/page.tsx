@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback, useEffect, useState } from "react";
+import React, { Suspense, useCallback, useEffect, useState } from "react";
 
 import { useRouter, useSearchParams } from "next/navigation";
 
@@ -8,7 +8,7 @@ import { useUser } from "@/store/useUser";
 
 import { Button, Input, useAlert } from "@r-4bb1t/rabbit-ui";
 
-export default function Kakao() {
+function Kakao() {
   const searchParams = useSearchParams();
   const code = searchParams.get("code");
   const state = searchParams.get("state");
@@ -114,5 +114,13 @@ export default function Kakao() {
         </Button>
       </div>
     </div>
+  );
+}
+
+export default function KakaoWrapper() {
+  return (
+    <Suspense fallback={<></>}>
+      <Kakao />
+    </Suspense>
   );
 }
