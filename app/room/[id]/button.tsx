@@ -41,7 +41,7 @@ export default function RoomButton({
       });
       setLoading(false);
     }
-  }, [roomId, user]);
+  }, [openModal, roomId, router, user]);
 
   return user ? (
     userIds.includes(user.id) ? (
