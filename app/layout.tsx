@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "다 같이 의 상해 봅시다.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;

@@ -17,14 +17,14 @@ model User {
 }
 
 model Room {
-    id           String         @id
-    name         String
+    id           String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     owner        User           @relation(fields: [ownerId], references: [id])
     ownerId      String
     bombs        Bomb[]
     UsersOnRooms UsersOnRooms[]
     startTime    DateTime
     endTime      DateTime
+    realEndTime  DateTime
 }
 
 model UsersOnRooms {
@@ -40,7 +40,7 @@ model UsersOnRooms {
 model Bomb {
     room           Room     @relation(fields: [roomId], references: [id])
     roomId         String
-    id             String   @id
+    id             String   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
     text           String[]
     originalUserId String
     senderId       String

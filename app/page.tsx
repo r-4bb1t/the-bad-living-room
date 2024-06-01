@@ -1,22 +1,22 @@
-import { getServerSession } from "next-auth/next";
-import { redirect } from "next/navigation";
+"use client";
 
-import { authOptions } from "@/app/api/auth/[...nextauth]";
+import { useEffect } from "react";
+
+import { useRouter } from "next/navigation";
+
 import Bomb from "@/components/bomb";
 import SignIn from "@/components/signIn";
+import { useUser } from "@/store/useUser";
 
-const checkCredentials = async () => {
-  const session = await getServerSession(authOptions);
+export default function Home() {
+  const { user } = useUser();
+  const router = useRouter();
 
-  if (session) {
-    redirect("/new");
-  }
-
-  return session;
-};
-
-export default async function Home() {
-  await checkCredentials();
+  useEffect(() => {
+    if (user) {
+      router.push("/new");
+    }
+  }, [router, user]);
 
   return (
     <main className="pt-24 pb-12 px-8 min-h-screen flex flex-col items-center justify-between gap-4">

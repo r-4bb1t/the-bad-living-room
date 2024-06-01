@@ -44,7 +44,11 @@ export const POST = async (req: Request) => {
       id: bombId,
     },
     data: {
-      owner: receiver,
+      owner: {
+        connect: {
+          id: receiverId,
+        },
+      },
       time: new Date(),
       via: [...bomb.via, senderId],
       text: [...bomb.text, text],

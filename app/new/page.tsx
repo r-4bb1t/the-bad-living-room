@@ -1,21 +1,56 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
-import { Button, List, Select } from "@r-4bb1t/rabbit-ui";
+import { useRouter } from "next/navigation";
+
+import { useUser } from "@/store/useUser";
+
+import { Button, List, Select, useAlert } from "@r-4bb1t/rabbit-ui";
 
 export default function Home() {
   const hour = new Date().getHours();
 
-  const [startTime, setStartTime] = useState(hour);
-  const [endTime, setEndTime] = useState(Math.min(hour + 6, 23));
+  const [startTime, setStartTime] = useState(hour + 1);
+  const [endTime, setEndTime] = useState(Math.min(hour + 6, 24));
 
-  /*  const { user } = useUser();
+  const [loading, setLoading] = useState(false);
+  const { openModal } = useAlert();
+
+  const { user } = useUser();
+
   const router = useRouter();
 
-  if (!user) {
-    router.push("/");
-  } */
+  const handleCreateRoom = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await fetch("/api/room", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({
+          ownerId: user?.id,
+          startTime,
+          endTime,
+        }),
+      });
+      const { id: roomId } = await res.json();
+      router.push(`/room/${roomId}`);
+    } catch (e) {
+      openModal({
+        children: "방 생성에 실패했습니다. 다시 시도해주세요.",
+        submitButtonText: "확인",
+        submitButtonAction: () => {},
+      });
+    }
+  }, [user?.id, startTime, endTime, router, openModal]);
+
+  useEffect(() => {
+    if (!user) {
+      router.push("/");
+    }
+  }, [user, router]);
 
   return (
     <main className="pt-24 pb-12 px-8 min-h-screen flex flex-col items-center justify-between gap-4">
@@ -26,6 +61,7 @@ export default function Home() {
           <li>
             게임은{" "}
             <Select
+              disabled={loading}
               sz={"xs"}
               options={new Array(24).fill(0).map((_, i) => ({
                 value: i,
@@ -41,10 +77,11 @@ export default function Home() {
             게임 종료 시간은{" "}
             <span className="text-primary">
               <Select
+                disabled={loading}
                 sz={"xs"}
                 options={new Array(24).fill(0).map((_, i) => ({
-                  value: i,
-                  label: `${i}시`,
+                  value: i + 1,
+                  label: `${i + 1}시`,
                 }))}
                 onChange={setEndTime}
                 value={endTime}
@@ -84,7 +121,12 @@ export default function Home() {
           </li>
         </List>
       </div>
-      <Button sz={"lg"} className="w-full">
+      <Button
+        sz={"lg"}
+        className="w-full"
+        onClick={handleCreateRoom}
+        loading={loading}
+      >
         방 만들기
       </Button>
     </main>
