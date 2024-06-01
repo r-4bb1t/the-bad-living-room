@@ -4,9 +4,6 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
-overrides:
-  '@r-4bb1t/rabbit-ui': C:\r4bb1t\programming\projects\rabbit-ui\dist\src
-
 importers:
 
   .:
@@ -15,8 +12,8 @@ importers:
         specifier: 5.14.0
         version: 5.14.0(prisma@5.14.0)
       '@r-4bb1t/rabbit-ui':
-        specifier: C:\r4bb1t\programming\projects\rabbit-ui\dist\src
-        version: link:../rabbit-ui/dist/src
+        specifier: ^0.0.44
+        version: 0.0.44(@types/react@18.3.3)
       classcat:
         specifier: ^5.0.5
         version: 5.0.5
@@ -303,6 +300,9 @@ packages:
 
   '@prisma/get-platform@5.14.0':
     resolution: {integrity: sha512-/yAyBvcEjRv41ynZrhdrPtHgk47xLRRq/o5eWGcUpBJ1YrUZTYB8EoPiopnP7iQrMATK8stXQdPOoVlrzuTQZw==}
+
+  '@r-4bb1t/rabbit-ui@0.0.44':
+    resolution: {integrity: sha512-Ap+08yncw/vOEADNVIUjZnN6qLDvG3O2Gk/MphqMvuCCFvrEa+jy/RxLXxCoOg3jCLtyh4pXGZC11qhCv8LHGQ==}
 
   '@rushstack/eslint-patch@1.10.3':
     resolution: {integrity: sha512-qC/xYId4NMebE6w/V33Fh9gWxLgURiNYgVNObbJl2LZv0GUUItCcCqC5axQSwRaAgaxl2mELq1rMzlswaQ0Zxg==}
@@ -821,6 +821,20 @@ packages:
     resolution: {integrity: sha512-TMKDUnIte6bfb5nWv7V/caI169OHgvwjb7V4WkeUvbQQdjr5rWKqHFiKWb/fcOwB+CzBT+qbWjvj+DVwRskpIg==}
     engines: {node: '>=14'}
 
+  framer-motion@11.2.10:
+    resolution: {integrity: sha512-/gr3PLZUVFCc86a9MqCUboVrALscrdluzTb3yew+2/qKBU8CX6nzs918/SRBRCqaPbx0TZP10CB6yFgK2C5cYQ==}
+    peerDependencies:
+      '@emotion/is-prop-valid': '*'
+      react: ^18.0.0
+      react-dom: ^18.0.0
+    peerDependenciesMeta:
+      '@emotion/is-prop-valid':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
   fs.realpath@1.0.0:
     resolution: {integrity: sha512-OO0pH2lK6a0hZnAdau5ItzHPI6pUlvI7jMVnxUQRtw4owF2wk8lOSabtGDCTP4Ggrg2MbGnWO9X8K1t4+fGMDw==}
 
@@ -1158,6 +1172,9 @@ packages:
     resolution: {integrity: sha512-cft0ywFfHkGprX5pwKyS9jme/ksh9eYAHSZqFRKN0XGp70kia4uqZOTPB+i+O51cqiJlvGLqzMGWnMHaeJTs3g==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
+
+  lucide@0.381.0:
+    resolution: {integrity: sha512-+RPg88RMmB+7EcusALa0EcedUY9xuw/6bGNeuf5t02dSx5DiJVl39Sc7XuOOU+zcZDvFKTRUaZv+ijRIjlb0PQ==}
 
   merge2@1.4.1:
     resolution: {integrity: sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg==}
@@ -2011,6 +2028,26 @@ snapshots:
     dependencies:
       '@prisma/debug': 5.14.0
 
+  '@r-4bb1t/rabbit-ui@0.0.44(@types/react@18.3.3)':
+    dependencies:
+      classcat: 5.0.5
+      framer-motion: 11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      lucide: 0.381.0
+      lucide-react: 0.381.0(react@18.3.1)
+      next: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      zustand: 4.5.2(@types/react@18.3.3)(react@18.3.1)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - '@emotion/is-prop-valid'
+      - '@opentelemetry/api'
+      - '@playwright/test'
+      - '@types/react'
+      - babel-plugin-macros
+      - immer
+      - sass
+
   '@rushstack/eslint-patch@1.10.3': {}
 
   '@swc/counter@0.1.3': {}
@@ -2719,6 +2756,13 @@ snapshots:
       cross-spawn: 7.0.3
       signal-exit: 4.1.0
 
+  framer-motion@11.2.10(react-dom@18.3.1(react@18.3.1))(react@18.3.1):
+    dependencies:
+      tslib: 2.6.2
+    optionalDependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+
   fs.realpath@1.0.0: {}
 
   fsevents@2.3.3:
@@ -3047,6 +3091,8 @@ snapshots:
   lucide-react@0.381.0(react@18.3.1):
     dependencies:
       react: 18.3.1
+
+  lucide@0.381.0: {}
 
   merge2@1.4.1: {}
 

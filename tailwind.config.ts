@@ -7,8 +7,8 @@ const config: Config = {
   content: [
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "C:\\r4bb1t\\programming\\projects\\rabbit-ui\\dist\\src/**/*.{js,jsx,ts,tsx}",
-    "./node_modules/@r-4bb1t/rabbit-ui/src/components/**/*.{js,jsx,ts,tsx}",
+    // "C:\\r4bb1t\\programming\\projects\\rabbit-ui\\dist\\src/**/*.{js,jsx,ts,tsx}",
+    "./node_modules/@r-4bb1t/rabbit-ui/dist/**/*.{js,jsx,ts,tsx}",
   ],
   theme: {
     extend: {

@@ -45,7 +45,6 @@ export default function Home() {
         submitButtonText: "확인",
         submitButtonAction: () => {},
       });
-    } finally {
       setLoading(false);
     }
   }, [user?.id, startHour, endHour, router, openModal]);
@@ -58,9 +57,9 @@ export default function Home() {
 
   return (
     <main className="pt-24 pb-12 px-8 min-h-screen flex flex-col items-center gap-4">
-      <div className="italic text-lg">
-        여기는 <span className="text-primary">{user?.name}</span>님이 친구들을
-        초대할 의상한거실...
+      <div className="text-lg">
+        여기는 <span className="text-primary font-bold">{user?.name}</span>님이
+        친구들을 초대할 의상한거실...
       </div>
       <Setting
         isEdit={true}

@@ -6,16 +6,18 @@ export default function Bomb({
   small,
   rotate = 0,
   disabled = false,
+  stop = false,
 }: {
   src?: string;
   small?: boolean;
   rotate?: number;
   disabled?: boolean;
+  stop?: boolean;
 }) {
   return (
     <div
       className={cc([
-        !disabled && "animate-bomb",
+        !stop && !disabled && "animate-bomb",
         small ? "w-12 h-12 mt-2" : "w-24 h-24 mt-4",
       ])}
     >

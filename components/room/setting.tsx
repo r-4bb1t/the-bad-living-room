@@ -1,5 +1,7 @@
 import { format } from "date-fns/format";
 
+import { RANDOM_ADD_TIME } from "@/constant";
+
 import { List, Select } from "@r-4bb1t/rabbit-ui";
 
 export default function Setting({
@@ -68,7 +70,7 @@ export default function Setting({
             ) : (
               `${endTime}시`
             )}
-            에서 {endTime}시 30분 사이
+            에서 {endTime}시 {RANDOM_ADD_TIME / 1000 / 60}분 사이
           </span>
           에 <span className="text-primary">무작위</span>로 결정됩니다.
         </li>

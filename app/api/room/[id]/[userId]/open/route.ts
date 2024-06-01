@@ -59,6 +59,9 @@ export const POST = async (
     },
     data: {
       lastVisit: now,
+      visits: {
+        increment: 1,
+      },
     },
   });
 

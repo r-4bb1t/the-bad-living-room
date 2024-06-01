@@ -1,5 +1,7 @@
 import { nanoid } from "nanoid";
 
+import { RANDOM_ADD_TIME } from "@/constant";
+
 import { PrismaClient } from "@prisma/client";
 
 export const POST = async (req: Request) => {
@@ -40,7 +42,7 @@ export const POST = async (req: Request) => {
       },
       startTime: start,
       endTime: end,
-      realEndTime: new Date(end.getTime() + Math.random() * 1000 * 60 * 30),
+      realEndTime: new Date(end.getTime() + Math.random() * RANDOM_ADD_TIME),
     },
   });
 

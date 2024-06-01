@@ -1,4 +1,9 @@
+"use client";
+
+import { useEffect } from "react";
+
 import RoomButton from "./button";
+import { useRouter } from "next/navigation";
 
 import Bomb from "@/components/bomb";
 import RoomRule from "@/components/room/rule";
@@ -6,6 +11,17 @@ import Setting from "@/components/room/setting";
 import type { RoomType } from "@/types/room";
 
 export default function Landing({ room }: { room: RoomType }) {
+  const router = useRouter();
+
+  useEffect(() => {
+    setTimeout(
+      () => {
+        router.refresh();
+      },
+      new Date(room.startTime).getTime() - new Date().getTime(),
+    );
+  }, [router, room]);
+
   return (
     <main className="pt-24 pb-12 px-8 min-h-screen flex flex-col items-center gap-4">
       <div className="text-lg">

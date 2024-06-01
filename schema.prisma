@@ -34,6 +34,8 @@ model UsersOnRooms {
     userId    String
     isAdmin   Boolean
     lastVisit DateTime @default(now())
+    visits    Int      @default(0)
+    sends     Int      @default(0)
 
     @@id([roomId, userId])
 }

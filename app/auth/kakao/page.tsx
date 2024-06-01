@@ -64,7 +64,6 @@ export default function Kakao() {
         submitButtonText: "확인",
         submitButtonAction: () => {},
       });
-    } finally {
       setLoading(false);
     }
   }, [name, router, setUser, state, user]);

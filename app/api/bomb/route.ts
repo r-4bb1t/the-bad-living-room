@@ -1,3 +1,5 @@
+import { BOMB_EXPIRE_TIME } from "@/constant";
+
 import { PrismaClient } from "@prisma/client";
 
 export const POST = async (req: Request) => {
@@ -39,7 +41,7 @@ export const POST = async (req: Request) => {
     });
   }
 
-  if (new Date(bomb.time).getTime() + 1000 * 60 * 30 < new Date().getTime()) {
+  if (new Date(bomb.time).getTime() + BOMB_EXPIRE_TIME < new Date().getTime()) {
     return Response.json({
       error: "Bomb is expired",
     });
@@ -58,7 +60,22 @@ export const POST = async (req: Request) => {
       time: new Date(),
       via: [...bomb.via, senderId],
       text: [...bomb.text, text],
+      senderId,
       opened: false,
+    },
+  });
+
+  await prisma.usersOnRooms.update({
+    where: {
+      roomId_userId: {
+        roomId: bomb.roomId,
+        userId: senderId,
+      },
+    },
+    data: {
+      sends: {
+        increment: 1,
+      },
     },
   });
 
