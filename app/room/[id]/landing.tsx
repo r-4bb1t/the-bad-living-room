@@ -18,7 +18,7 @@ export default function Landing({ room }: { room: RoomType }) {
       () => {
         router.refresh();
       },
-      new Date(room.startTime).getTime() - new Date().getTime(),
+      new Date(room.startTime).getTime() - new Date().getTime() + 100,
     );
   }, [router, room]);
 
