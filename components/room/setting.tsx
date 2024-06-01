@@ -50,7 +50,7 @@ export default function Setting({
               />
             ) : (
               <>
-                {format(startTime, "M월 d일 HH시")}
+                {format(startTime, "M월 d일 H시")}
                 {startTime.getMinutes() === 0
                   ? ""
                   : " " + startTime.getMinutes() + "분"}{" "}
@@ -79,7 +79,7 @@ export default function Setting({
                 {endTime.getDate() === startTime.getDate()
                   ? ""
                   : format(endTime, "M월 d일 ")}
-                {format(endTime, "HH시")}
+                {format(endTime, "H시")}
                 {endTime.getMinutes() === 0
                   ? ""
                   : " " + endTime.getMinutes() + "분"}
@@ -93,7 +93,7 @@ export default function Setting({
                   new Date(endTime.getTime() + RANDOM_ADD_TIME),
                   "M월 d일 ",
                 )}
-            {format(new Date(endTime.getTime() + RANDOM_ADD_TIME), "HH시")}
+            {format(new Date(endTime.getTime() + RANDOM_ADD_TIME), "H시")}
             {new Date(endTime.getTime() + RANDOM_ADD_TIME).getMinutes() === 0
               ? ""
               : " " +

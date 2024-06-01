@@ -91,6 +91,15 @@ export default function Home({ room }: { room: RoomType }) {
     if (!room.users.find((u) => u.id === user.id)) {
       router.push(`/`);
     }
+    if (room.users.length === 1) {
+      openModal({
+        children: "방에 아무도 없어서 게임을 시작할 수 없어요!ㅎ",
+        submitButtonText: "확인",
+        submitButtonAction: () => {
+          router.push(`/new`);
+        },
+      });
+    }
     getBomb();
   }, [getBomb, user, room.users]);
 

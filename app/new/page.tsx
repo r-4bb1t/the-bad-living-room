@@ -72,7 +72,7 @@ export default function Home() {
         친구들을 초대할 의상한거실...
       </div>
       <Setting
-        isEdit={true}
+        isEdit={!loading}
         startTime={startTime}
         endTime={endTime}
         setStartTime={setStartTime}
