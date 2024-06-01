@@ -42,7 +42,7 @@ export const POST = async (req: Request) => {
     },
   });
 
-  await prisma.$disconnect();
+  // await prisma.$disconnect();
   return Response.json({
     id: room.id,
   });

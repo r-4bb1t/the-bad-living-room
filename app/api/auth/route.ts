@@ -85,7 +85,7 @@ export const POST = async (req: Request) => {
     });
   }
 
-  await prisma.$disconnect();
+  // await prisma.$disconnect();
   return Response.json({
     user: {
       id: `kakao-${id}`,
@@ -107,6 +107,6 @@ export const PATCH = async (req: Request) => {
       name,
     },
   });
-  await prisma.$disconnect();
+  // await prisma.$disconnect();
   return Response.json({});
 };

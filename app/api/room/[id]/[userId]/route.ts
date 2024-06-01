@@ -16,7 +16,7 @@ export const GET = async (
   });
 
   if (!userOnRoom || !user) {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
     return Response.json({
       error: "User is not in the room",
     });
@@ -26,7 +26,7 @@ export const GET = async (
     where: { roomId, ownerId: userId },
   });
 
-  await prisma.$disconnect();
+  // await prisma.$disconnect();
   return Response.json({ bombs, lastVisit: userOnRoom.lastVisit });
 };
 

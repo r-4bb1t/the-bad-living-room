@@ -21,7 +21,7 @@ export const POST = async (
   });
 
   if (!room || userOnRoom) {
-    await prisma.$disconnect();
+    // await prisma.$disconnect();
     return Response.json({
       error: "Room not found or user is already in the room",
     });
@@ -46,7 +46,7 @@ export const POST = async (
     },
   });
 
-  await prisma.$disconnect();
+  // await prisma.$disconnect();
   return Response.json({
     message: "User entered the room",
   });
