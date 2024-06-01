@@ -85,7 +85,16 @@ export const GET = async (
     minBombUserId = usersOnRoom[0].user.id,
     maxCecursiveCnt = 0,
     maxRecursiveUserId = usersOnRoom[0].user.id;
-  if (now > new Date(room.realEndTime)) {
+
+  if (now > new Date(room.realEndTime) && !room.ended) {
+    await prisma.room.update({
+      where: {
+        id,
+      },
+      data: {
+        ended: true,
+      },
+    });
     usersOnRoom.forEach(async (uor) => {
       if (now.getHours() > uor.lastVisit.getHours()) {
         const count = now.getHours() - uor.lastVisit.getHours();
@@ -151,18 +160,18 @@ export const GET = async (
     const maxVisits = await prisma.usersOnRooms.findFirst({
       where: {
         roomId: id,
-        orderBy: {
-          visits: "desc",
-        },
+      },
+      orderBy: {
+        visits: "desc",
       },
     });
 
     const maxSends = await prisma.usersOnRooms.findFirst({
       where: {
         roomId: id,
-        orderBy: {
-          sends: "desc",
-        },
+      },
+      orderBy: {
+        sends: "desc",
       },
     });
 

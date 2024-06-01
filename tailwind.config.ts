@@ -1,3 +1,4 @@
+import tailwindScrollbar from "tailwind-scrollbar";
 import type { Config } from "tailwindcss";
 
 import { tailwindPreset } from "@r-4bb1t/rabbit-ui";
@@ -22,6 +23,6 @@ const config: Config = {
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindScrollbar],
 };
 export default config;

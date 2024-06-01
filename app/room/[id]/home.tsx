@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import SendBomb from "./sendBomb";
 import { Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import Bomb from "@/components/bomb";
 import RoomRule from "@/components/room/rule";
@@ -18,6 +19,7 @@ import { Button, Spinner, useAlert } from "@r-4bb1t/rabbit-ui";
 export default function Home({ room }: { room: RoomType }) {
   const { user } = useUser();
   const { openModal, addToast } = useAlert();
+  const router = useRouter();
 
   const [loading, setLoading] = useState(true);
   const [getFirst, setGetFirst] = useState(false);
@@ -66,7 +68,7 @@ export default function Home({ room }: { room: RoomType }) {
       if (opened.length === 0) {
         addToast({
           type: "info",
-          text: "새로 도착한 폭탄이 없어요! 휴대폰을 적당히 내려놓고 쉬어가세요.",
+          text: "새로 도착한 폭탄이 없어요!",
         });
       } else {
         addToast({
@@ -85,8 +87,12 @@ export default function Home({ room }: { room: RoomType }) {
   }, [user]);
 
   useEffect(() => {
-    if (user) getBomb();
-  }, [getBomb, user]);
+    if (!user) return;
+    if (!room.users.find((u) => u.id === user.id)) {
+      router.push(`/`);
+    }
+    getBomb();
+  }, [getBomb, user, room.users]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -154,7 +160,7 @@ export default function Home({ room }: { room: RoomType }) {
           ? "우편함 확인까지 " + lastMinute + "분"
           : "우편함 확인하기"}
       </Button>
-      <div className="h-full overflow-auto  scrollbar-thumb-primary scrollbar-track-transparent scrollbar-thin w-full rounded border border-primary border-dotted px-4 pt-2 pb-4 gap-4 flex flex-col items-center">
+      <div className="h-full overflow-auto w-full rounded border border-primary border-dotted px-4 pt-2 pb-4 gap-4 flex flex-col items-center">
         <h2 className="text-center text-sm text-primary font-bold">
           내 폭탄함
         </h2>

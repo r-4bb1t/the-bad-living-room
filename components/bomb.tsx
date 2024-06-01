@@ -1,5 +1,5 @@
 import cc from "classcat";
-import { Bomb as BombIcon } from "lucide-react";
+import { Bomb as BombIcon, Crown } from "lucide-react";
 
 export default function Bomb({
   src,
@@ -7,12 +7,14 @@ export default function Bomb({
   rotate = 0,
   disabled = false,
   stop = false,
+  win = false,
 }: {
   src?: string;
   small?: boolean;
   rotate?: number;
   disabled?: boolean;
   stop?: boolean;
+  win?: boolean;
 }) {
   return (
     <div
@@ -28,6 +30,11 @@ export default function Bomb({
         ])}
         style={{ transform: `rotate(${rotate - 45}deg)` }}
       >
+        {win && (
+          <div className="absolute -top-4 text-yellow-400 z-20">
+            <Crown size={36} />
+          </div>
+        )}
         <BombIcon size={small ? 48 : 96} />
         <div
           className={cc([

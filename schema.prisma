@@ -25,6 +25,7 @@ model Room {
     startTime    DateTime
     endTime      DateTime
     realEndTime  DateTime
+    ended        Boolean        @default(false)
 }
 
 model UsersOnRooms {

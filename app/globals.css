@@ -26,3 +26,9 @@ body {
     text-wrap: balance;
   }
 }
+
+@layer components {
+  * {
+    @apply scrollbar-thin scrollbar-track-transparent scrollbar-thumb-primary;
+  }
+}
