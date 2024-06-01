@@ -88,38 +88,42 @@ export const GET = async (
     maxCecursiveCnt = 0,
     maxRecursiveUserId = usersOnRoom[0].user.id;
 
-  if (now > new Date(room.realEndTime) && !room.ended) {
-    await prisma.room.update({
-      where: {
-        id,
-      },
-      data: {
-        ended: true,
-      },
-    });
-    usersOnRoom.forEach(async (uor) => {
-      if (now.getHours() > uor.lastVisit.getHours()) {
-        const count = now.getHours() - uor.lastVisit.getHours();
-        for (let i = 0; i < count; i++) {
-          await prisma.bomb.create({
-            data: {
-              id: nanoid(),
-              originalUserId: uor.user.id,
-              ownerId: uor.user.id,
-              senderId: uor.user.id,
-              opened: false,
-              roomId: id,
-              time: new Date(
-                now.getFullYear(),
-                now.getMonth(),
-                now.getDate(),
-                uor.lastVisit.getHours() + i + 1,
-              ),
-            },
-          });
+  if (now > new Date(room.realEndTime)) {
+    if (!room.ended) {
+      usersOnRoom.forEach(async (uor) => {
+        if (now.getHours() > uor.lastVisit.getHours()) {
+          const count = now.getHours() - uor.lastVisit.getHours();
+          for (let i = 0; i < count; i++) {
+            await prisma.bomb.create({
+              data: {
+                id: nanoid(),
+                originalUserId: uor.user.id,
+                ownerId: uor.user.id,
+                senderId: uor.user.id,
+                opened: false,
+                roomId: id,
+                time: new Date(
+                  now.getFullYear(),
+                  now.getMonth(),
+                  now.getDate(),
+                  uor.lastVisit.getHours() + i + 1,
+                ),
+              },
+            });
+          }
         }
-      }
+      });
+      await prisma.room.update({
+        where: {
+          id,
+        },
+        data: {
+          ended: true,
+        },
+      });
+    }
 
+    usersOnRoom.forEach(async (uor) => {
       const bombCnt = await prisma.bomb.count({
         where: {
           ownerId: uor.user.id,
