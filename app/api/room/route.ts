@@ -7,11 +7,7 @@ import { PrismaClient } from "@prisma/client";
 export const POST = async (req: Request) => {
   const prisma = new PrismaClient();
   const { ownerId, startTime, endTime } = await req.json();
-  const owner = await prisma.user.findUnique({
-    where: {
-      id: ownerId,
-    },
-  });
+
   let start = new Date();
   start.setHours(startTime);
   start.setMinutes(0);

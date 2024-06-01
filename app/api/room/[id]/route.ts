@@ -41,6 +41,7 @@ export const GET = async (
   });
 
   if (!room) {
+    await prisma.$disconnect();
     return Response.json({
       message: "Room not found",
     });
@@ -205,6 +206,7 @@ export const GET = async (
       });
   }
 
+  await prisma.$disconnect();
   return Response.json({
     id: room.id,
     ownerName: room.owner.name,

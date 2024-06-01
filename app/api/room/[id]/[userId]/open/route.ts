@@ -18,6 +18,7 @@ export const POST = async (
   });
 
   if (!userOnRoom || !user) {
+    await prisma.$disconnect();
     return Response.json({
       error: "User is not in the room",
     });
@@ -83,5 +84,6 @@ export const POST = async (
     },
   });
 
+  await prisma.$disconnect();
   return Response.json({ bombs: unopened });
 };
