@@ -49,7 +49,7 @@ export default function End({ room }: { room: RoomType }) {
                       {bomb.text[index]}
                     </div>
                   </div>
-                  <div className="w-6 h-6 rounded-full overflow-hidden border-4 border-primary">
+                  <div className="w-6 h-6 rounded-full overflow-hidden border-2 border-primary">
                     <img
                       src={
                         room.users.find(
