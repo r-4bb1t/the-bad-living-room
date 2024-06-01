@@ -9,8 +9,9 @@ import { useUser } from "@/store/useUser";
 import { Button, Input, useAlert } from "@r-4bb1t/rabbit-ui";
 
 export default function Kakao() {
-  const code = useSearchParams().get("code");
-  const state = useSearchParams().get("state");
+  const searchParams = useSearchParams();
+  const code = searchParams.get("code");
+  const state = searchParams.get("state");
 
   const { user, setUser } = useUser();
   const { openModal } = useAlert();
