@@ -13,11 +13,17 @@ export const POST = async (req: Request) => {
     where: {
       id: senderId,
     },
+    select: {
+      bombs: true,
+    },
   });
 
   const receiver = await prisma.user.findUnique({
     where: {
       id: receiverId,
+    },
+    select: {
+      bombs: true,
     },
   });
 
@@ -55,21 +61,32 @@ export const POST = async (req: Request) => {
     },
   });
 
-  await prisma.receiver.update({
+  await prisma.user.update({
     where: {
       id: receiverId,
     },
+    select: {
+      bombs: true,
+    },
     data: {
-      bombs: [...receiver.bombs, bombId],
+      bombs: {
+        connect: {
+          id: bombId,
+        },
+      },
     },
   });
 
-  await prisma.sender.update({
+  await prisma.user.update({
     where: {
       id: senderId,
     },
     data: {
-      bombs: sender.bombs.filter((b) => b !== bombId),
+      bombs: {
+        disconnect: {
+          id: bombId,
+        },
+      },
     },
   });
 

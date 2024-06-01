@@ -4,16 +4,19 @@ import { Bomb as BombIcon } from "lucide-react";
 export default function Bomb({
   src,
   small,
+  rotate = 0,
 }: {
   src?: string;
   small?: boolean;
+  rotate?: number;
 }) {
   return (
     <div
       className={cc([
-        "relative flex items-center justify-center text-primary",
-        small ? "w-12 h-12" : "w-24 h-24",
+        "relative flex items-center justify-center text-primary ",
+        small ? "w-12 h-12 mt-2" : "w-24 h-24 mt-4",
       ])}
+      style={{ transform: `rotate(${rotate - 45}deg)` }}
     >
       <BombIcon size={small ? 48 : 96} />
       <div
@@ -25,7 +28,12 @@ export default function Bomb({
         {src ? (
           <img src={src} className="w-full h-full object-cover rotate-45" />
         ) : (
-          <div className={cc(["font-bold", small ? "text-xl" : "text-3xl"])}>
+          <div
+            className={cc([
+              "font-bold rotate-45",
+              small ? "text-xl" : "text-3xl",
+            ])}
+          >
             ?
           </div>
         )}

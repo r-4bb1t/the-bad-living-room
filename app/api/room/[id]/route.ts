@@ -1,6 +1,9 @@
 import { PrismaClient } from "@prisma/client";
 
-export const GET = async (req: Request, params: { id: string }) => {
+export const GET = async (
+  req: Request,
+  { params }: { params: { id: string } },
+) => {
   const prisma = new PrismaClient();
 
   const { id } = params;
@@ -42,5 +45,7 @@ export const GET = async (req: Request, params: { id: string }) => {
     ownerName: room.owner.name,
     startTime: room.startTime,
     endTime: room.endTime,
+    //@ts-ignore
+    users: room.users,
   });
 };

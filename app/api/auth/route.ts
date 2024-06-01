@@ -60,6 +60,8 @@ export const POST = async (req: Request) => {
   const { id, properties } = kakaoUser;
   const { nickname: name, profile_image: photo } = properties;
 
+  let isNew = false;
+
   const user = await prisma.user.findUnique({
     where: {
       id: `kakao-${id}`,
@@ -74,13 +76,13 @@ export const POST = async (req: Request) => {
         photo,
       },
     });
+    isNew = true;
   } else {
     await prisma.user.update({
       where: {
         id: `kakao-${id}`,
       },
       data: {
-        name,
         photo,
       },
     });
@@ -93,5 +95,21 @@ export const POST = async (req: Request) => {
       name,
       photo,
     },
+    isNew,
   });
+};
+
+export const PATCH = async (req: Request) => {
+  const { id, name } = await req.json();
+  const prisma = new PrismaClient();
+  await prisma.user.update({
+    where: {
+      id,
+    },
+    data: {
+      name,
+    },
+  });
+  await prisma.$disconnect();
+  return Response.json({});
 };
