@@ -69,6 +69,7 @@ export default function Home() {
         setStartHour={setStartHour}
         setEndHour={setEndHour}
         loading={loading}
+        date={new Date()}
       />
       <RoomRule />
       <Button

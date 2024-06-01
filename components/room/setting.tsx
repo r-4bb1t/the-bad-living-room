@@ -1,4 +1,6 @@
-import { Select } from "@r-4bb1t/rabbit-ui";
+import { format } from "date-fns/format";
+
+import { List, Select } from "@r-4bb1t/rabbit-ui";
 
 export default function Setting({
   isEdit,
@@ -7,6 +9,7 @@ export default function Setting({
   setStartHour: setStartTime,
   setEndHour: setEndTime,
   loading,
+  date,
 }: {
   loading?: boolean;
   isEdit: boolean;
@@ -15,15 +18,17 @@ export default function Setting({
   endHour: number;
   setStartHour?: React.Dispatch<React.SetStateAction<number>>;
   setEndHour?: React.Dispatch<React.SetStateAction<number>>;
+
+  date: Date;
 }) {
   return (
     <div className="p-4 rounded border border-primary border-dotted">
       <h2 className="font-bold text-primary mb-1">
         {isEdit ? "Setting" : "Notice"}
       </h2>
-      <ul className="list-disc px-4 marker:text-primary leading-7">
+      <List marker="disc" className="px-4 marker:text-primary">
         <li>
-          게임은{" "}
+          게임은 {format(date, "yyyy년 MM월 dd일")} 바로 오늘,{" "}
           <span className="text-primary">
             {isEdit ? (
               <Select
@@ -67,7 +72,7 @@ export default function Setting({
           </span>
           에 <span className="text-primary">무작위</span>로 결정됩니다.
         </li>
-      </ul>
+      </List>
     </div>
   );
 }

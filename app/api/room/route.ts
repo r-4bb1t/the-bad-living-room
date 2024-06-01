@@ -35,6 +35,7 @@ export const POST = async (req: Request) => {
             },
           },
           isAdmin: true,
+          lastVisit: new Date(start.getTime() - 1000 * 60 * 20),
         },
       },
       startTime: start,

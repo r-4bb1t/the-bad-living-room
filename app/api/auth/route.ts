@@ -26,7 +26,6 @@ interface KakaoUser {
 
 export const POST = async (req: Request) => {
   const { code } = await req.json();
-  console.log("SSSSSSSSSSSSSSSSSSSS");
 
   const res = await fetch("https://kauth.kakao.com/oauth/token", {
     method: "POST",
@@ -45,8 +44,6 @@ export const POST = async (req: Request) => {
   });
 
   const kakao: KakaoAuth = await res.json();
-
-  console.log(kakao);
 
   const userRes = await fetch("https://kapi.kakao.com/v2/user/me", {
     headers: {

@@ -20,7 +20,6 @@ export default function Kakao() {
   const [name, setName] = useState<string | null>(null);
 
   const handleAuthCode = useCallback(async (code: string) => {
-    console.log("ASDF");
     try {
       const res = await fetch("/api/auth", {
         method: "POST",
@@ -71,7 +70,6 @@ export default function Kakao() {
   }, [name, router, setUser, state, user]);
 
   useEffect(() => {
-    console.log(code);
     if (code) handleAuthCode(code);
   }, [code]);
 
@@ -94,7 +92,7 @@ export default function Kakao() {
           },
         ]}
       />
-      <div className="w-full grid grid-cols-2 gap-2">
+      <div className="w-full grid grid-cols-2 gap-2 mt-2">
         <Button
           onClick={handleUpdateName}
           className="w-full shrink"

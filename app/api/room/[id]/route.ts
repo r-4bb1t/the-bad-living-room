@@ -45,7 +45,18 @@ export const GET = async (
     ownerName: room.owner.name,
     startTime: room.startTime,
     endTime: room.endTime,
-    //@ts-ignore
-    users: room.users,
+    status:
+      new Date() < new Date(room.startTime)
+        ? "waiting"
+        : new Date() < new Date(room.endTime)
+          ? "playing"
+          : "end",
+    users: room.UsersOnRooms.map((userOnRoom) => ({
+      id: userOnRoom.user.id,
+      name: userOnRoom.user.name,
+      photo: userOnRoom.user.photo,
+    })),
   });
 };
+
+export const dynamic = "force-dynamic";

@@ -58,6 +58,7 @@ export const POST = async (req: Request) => {
       time: new Date(),
       via: [...bomb.via, senderId],
       text: [...bomb.text, text],
+      opened: false,
     },
   });
 

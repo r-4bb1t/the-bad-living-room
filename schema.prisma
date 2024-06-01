@@ -28,11 +28,12 @@ model Room {
 }
 
 model UsersOnRooms {
-    room    Room    @relation(fields: [roomId], references: [id])
-    roomId  String
-    user    User    @relation(fields: [userId], references: [id])
-    userId  String
-    isAdmin Boolean
+    room      Room     @relation(fields: [roomId], references: [id])
+    roomId    String
+    user      User     @relation(fields: [userId], references: [id])
+    userId    String
+    isAdmin   Boolean
+    lastVisit DateTime @default(now())
 
     @@id([roomId, userId])
 }
@@ -48,4 +49,5 @@ model Bomb {
     owner          User     @relation(fields: [ownerId], references: [id])
     ownerId        String
     via            String[]
+    opened         Boolean
 }
