@@ -34,7 +34,7 @@ export default function RoomButton({
       });
       setTimeout(() => {
         router.refresh();
-      }, 300);
+      }, 1100);
     } catch (e) {
       openModal({
         children: "입장에 실패했습니다. 다시 시도해주세요.",

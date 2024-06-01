@@ -7,7 +7,7 @@ import type { RoomType } from "@/types/room";
 const getRoomData = async (id: string) => {
   const res = await fetch(`${process.env.APP_HOST}/api/room/${id}`, {
     next: {
-      revalidate: 100,
+      revalidate: 1,
     },
   });
   const data: RoomType = await res.json();
