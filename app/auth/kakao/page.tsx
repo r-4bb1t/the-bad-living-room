@@ -18,6 +18,7 @@ export default function Kakao() {
 
   const [loading, setLoading] = useState(false);
   const [name, setName] = useState<string | null>(null);
+  const [authFlag, setAuthFlag] = useState(false);
 
   const handleAuthCode = useCallback(async (code: string) => {
     try {
@@ -66,11 +67,14 @@ export default function Kakao() {
       });
       setLoading(false);
     }
-  }, [name, router, setUser, state, user]);
+  }, [name, openModal, router, setUser, state, user]);
 
   useEffect(() => {
-    if (code) handleAuthCode(code);
-  }, [code]);
+    if (code && !authFlag) {
+      handleAuthCode(code);
+      setAuthFlag(true);
+    }
+  }, [code, handleAuthCode, authFlag]);
 
   return name === null ? (
     <></>
