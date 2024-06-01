@@ -1,36 +1,33 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+
 import End from "./end";
 import Home from "./home";
 import Landing from "./landing";
 
-import type { RoomType } from "@/types/room";
+import { RoomType } from "@/types/room";
 
-const getRoomData = async (id: string) => {
-  try {
+export default function Room({ params: { id } }: { params: { id: string } }) {
+  const [room, setRoom] = useState<RoomType | null>(null);
+
+  const getRoomData = useCallback(async () => {
     const res = await fetch(`${process.env.APP_HOST}/api/room/${id}`, {
       cache: "no-cache",
     });
-    const data: RoomType = await res.json();
-    return data;
-  } catch (e) {
-    const res = await fetch(`${process.env.APP_HOST}/api/room/${id}`, {
-      cache: "no-cache",
-    });
-    const data: RoomType = await res.json();
-    return data;
-  }
-};
+    const data = await res.json();
+    setRoom(data);
+  }, [id]);
 
-export default async function Room({
-  params: { id },
-}: {
-  params: { id: string };
-}) {
-  const room = await getRoomData(id);
+  useEffect(() => {
+    getRoomData();
+  }, [getRoomData]);
+
   return (
     <>
-      {room.status === "waiting" && <Landing room={room} />}
-      {room.status === "playing" && <Home room={room} />}
-      {room.status === "end" && <End room={room} />}
+      {room?.status === "waiting" && <Landing room={room} />}
+      {room?.status === "playing" && <Home room={room} />}
+      {room?.status === "end" && <End room={room} />}
     </>
   );
 }
