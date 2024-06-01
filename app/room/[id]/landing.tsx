@@ -8,9 +8,9 @@ import type { RoomType } from "@/types/room";
 export default function Landing({ room }: { room: RoomType }) {
   return (
     <main className="pt-24 pb-12 px-8 min-h-screen flex flex-col items-center gap-4">
-      <div className="italic text-lg">
-        여기는 <span className="text-primary">{room.ownerName}</span>님이 초대한
-        의상한거실...
+      <div className="text-lg">
+        여기는 <span className="text-primary font-bold">{room.ownerName}</span>
+        님이 초대한 의상한거실...
       </div>
       <div className="flex w-full justify-center flex-wrap gap-x-4">
         {room.users.map((user) => (

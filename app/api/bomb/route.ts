@@ -62,35 +62,6 @@ export const POST = async (req: Request) => {
     },
   });
 
-  await prisma.user.update({
-    where: {
-      id: receiverId,
-    },
-    select: {
-      bombs: true,
-    },
-    data: {
-      bombs: {
-        connect: {
-          id: bombId,
-        },
-      },
-    },
-  });
-
-  await prisma.user.update({
-    where: {
-      id: senderId,
-    },
-    data: {
-      bombs: {
-        disconnect: {
-          id: bombId,
-        },
-      },
-    },
-  });
-
   await prisma.$disconnect();
   return Response.json({});
 };

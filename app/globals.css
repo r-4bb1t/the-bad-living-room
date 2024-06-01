@@ -2,6 +2,25 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url("https://cdn.jsdelivr.net/gh/wanteddev/wanted-sans@v1.0.3/packages/wanted-sans/fonts/webfonts/variable/split/WantedSansVariable.min.css");
+
+body {
+  font-family: "Wanted Sans", sans-serif;
+}
+
+@keyframes bomb {
+  from {
+    transform: rotate(-10deg);
+  }
+  to {
+    transform: rotate(10deg);
+  }
+}
+
+.animate-bomb {
+  animation: bomb 0.2s infinite alternate ease-in-out;
+}
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
