@@ -39,6 +39,7 @@ export default function RoomButton({
         submitButtonText: "확인",
         submitButtonAction: () => {},
       });
+    } finally {
       setLoading(false);
     }
   }, [openModal, roomId, router, user]);
