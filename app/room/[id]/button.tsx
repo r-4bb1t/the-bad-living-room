@@ -32,7 +32,7 @@ export default function RoomButton({
         },
         body: JSON.stringify({ userId: user.id }),
       });
-      router.refresh();
+      router.replace(`/room/${roomId}`);
     } catch (e) {
       openModal({
         children: "입장에 실패했습니다. 다시 시도해주세요.",

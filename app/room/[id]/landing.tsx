@@ -16,7 +16,7 @@ export default function Landing({ room }: { room: RoomType }) {
   useEffect(() => {
     setTimeout(
       () => {
-        router.refresh();
+        router.replace(`/room/${room.id}`);
       },
       new Date(room.startTime).getTime() - new Date().getTime() + 100,
     );
