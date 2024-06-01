@@ -16,10 +16,14 @@ export const POST = async (
     },
   });
 
-  if (!room) {
+  const userOnRoom = await prisma.usersOnRooms.findFirst({
+    where: { roomId: id, userId },
+  });
+
+  if (!room || userOnRoom) {
     await prisma.$disconnect();
     return Response.json({
-      error: "Room not found",
+      error: "Room not found or user is already in the room",
     });
   }
 
