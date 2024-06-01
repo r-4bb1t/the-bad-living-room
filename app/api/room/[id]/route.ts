@@ -20,6 +20,7 @@ export const GET = async (
       startTime: true,
       endTime: true,
       realEndTime: true,
+      ended: true,
       owner: {
         select: {
           name: true,

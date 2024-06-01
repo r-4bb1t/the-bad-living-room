@@ -7,7 +7,6 @@ export interface RoomType {
   endTime: string;
   users: UserType[];
   status: "waiting" | "playing" | "end";
-
   end?: EndType;
 }
 
