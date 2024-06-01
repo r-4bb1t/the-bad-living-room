@@ -43,9 +43,9 @@ export default function End({ room }: { room: RoomType }) {
             {bomb.via.length > 0 &&
               [...new Array(bomb.via.length - 1)].map((_, index) => (
                 <Fragment key={`via-${index}`}>
-                  <div className="flex flex-col gap-2 items-center relative w-24 text-primary">
+                  <div className="flex flex-col gap-2 items-center relative w-12 text-primary">
                     <ChevronRight size={16} />
-                    <div className="absolute -bottom-6 w-16 text-xs py-0.5 px-2 border-dotted rounded border-primary border">
+                    <div className="absolute top-[calc(100%+2px)] break-keep text-center w-16 text-xs">
                       {bomb.text[index]}
                     </div>
                   </div>

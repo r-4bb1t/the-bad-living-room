@@ -185,6 +185,7 @@ const Modal = ({
             onChange={(e) => setText(e.target.value)}
             sz="sm"
             placeholder="바보"
+            maxLength={12}
           />
           <Button onClick={sendBomb} loading={loading}>
             폭탄 보내기
