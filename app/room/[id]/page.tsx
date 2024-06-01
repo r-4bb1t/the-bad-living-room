@@ -5,11 +5,19 @@ import Landing from "./landing";
 import type { RoomType } from "@/types/room";
 
 const getRoomData = async (id: string) => {
-  const res = await fetch(`${process.env.APP_HOST}/api/room/${id}`, {
-    cache: "no-cache",
-  });
-  const data: RoomType = await res.json();
-  return data;
+  try {
+    const res = await fetch(`${process.env.APP_HOST}/api/room/${id}`, {
+      cache: "no-cache",
+    });
+    const data: RoomType = await res.json();
+    return data;
+  } catch (e) {
+    const res = await fetch(`${process.env.APP_HOST}/api/room/${id}`, {
+      cache: "no-cache",
+    });
+    const data: RoomType = await res.json();
+    return data;
+  }
 };
 
 export default async function Room({
