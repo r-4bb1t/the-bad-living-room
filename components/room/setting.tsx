@@ -26,7 +26,7 @@ export default function Setting({
       <h2 className="font-bold text-primary mb-1">
         {isEdit ? "Setting" : "Notice"}
       </h2>
-      <List marker="disc" className="px-4 marker:text-primary">
+      <List marker="disc" className="px-4 leading-7">
         <li>
           게임은 {format(date, "yyyy년 MM월 dd일")} 바로 오늘,{" "}
           <span className="text-primary">
