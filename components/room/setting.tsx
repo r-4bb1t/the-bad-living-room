@@ -1,27 +1,26 @@
+"use client";
+
 import { format } from "date-fns/format";
 
 import { RANDOM_ADD_TIME } from "@/constant";
 
-import { List, Select } from "@r-4bb1t/rabbit-ui";
+import { Input, List } from "@r-4bb1t/rabbit-ui";
 
 export default function Setting({
   isEdit,
-  startHour: startTime,
-  endHour: endTime,
-  setStartHour: setStartTime,
-  setEndHour: setEndTime,
+  startTime,
+  endTime,
+  setStartTime,
+  setEndTime,
   loading,
-  date,
 }: {
   loading?: boolean;
   isEdit: boolean;
 
-  startHour: number;
-  endHour: number;
-  setStartHour?: React.Dispatch<React.SetStateAction<number>>;
-  setEndHour?: React.Dispatch<React.SetStateAction<number>>;
-
-  date: Date;
+  startTime: Date;
+  endTime: Date;
+  setStartTime?: React.Dispatch<React.SetStateAction<Date>>;
+  setEndTime?: React.Dispatch<React.SetStateAction<Date>>;
 }) {
   return (
     <div className="p-4 rounded border border-primary border-dotted">
@@ -30,49 +29,80 @@ export default function Setting({
       </h2>
       <List marker="disc" className="px-4 leading-7">
         <li>
-          게임은 {format(date, "yyyy년 MM월 dd일")} 바로 오늘,{" "}
-          <span className="text-primary">
+          게임은{" "}
+          <span className="text-primary font-bold">
             {isEdit ? (
-              <Select
+              <Input
+                type="datetime-local"
                 fullWidth={false}
                 disabled={loading}
                 sz={"xs"}
-                options={new Array(24).fill(0).map((_, i) => ({
-                  value: i,
-                  label: `${i}시`,
-                }))}
-                onChange={setStartTime}
-                value={startTime}
-                className="w-22 mr-2 text-primary"
+                onChange={(e) => {
+                  console.log(e.target.value);
+                  setStartTime!(new Date(e.target.value));
+                }}
+                value={
+                  format(startTime, "yyyy-MM-dd") +
+                  "T" +
+                  format(startTime, "hh:mm")
+                }
+                className="mr-2 text-primary"
               />
             ) : (
-              `${startTime}시`
+              <>
+                {format(startTime, "M월 d일 HH시")}
+                {startTime.getMinutes() === 0
+                  ? ""
+                  : " " + startTime.getMinutes() + "분"}{" "}
+              </>
             )}
           </span>
           부터 시작됩니다.
         </li>
         <li>
           게임 종료 시간은{" "}
-          <span className="text-primary">
+          <span className="text-primary font-bold">
             {isEdit ? (
-              <Select
+              <Input
+                type="datetime-local"
                 fullWidth={false}
                 disabled={loading}
                 sz={"xs"}
-                options={new Array(24).fill(0).map((_, i) => ({
-                  value: i + 1,
-                  label: `${i + 1}시`,
-                }))}
-                onChange={setEndTime}
-                value={endTime}
-                className="w-22 mr-2"
+                onChange={(e) => setEndTime!(new Date(e.target.value))}
+                value={
+                  format(endTime, "yyyy-MM-dd") + "T" + format(endTime, "hh:mm")
+                }
+                className="mr-2 text-primary"
               />
             ) : (
-              `${endTime}시`
+              <>
+                {endTime.getDate() === startTime.getDate()
+                  ? ""
+                  : format(endTime, "M월 d일 ")}
+                {format(endTime, "HH시")}
+                {endTime.getMinutes() === 0
+                  ? ""
+                  : " " + endTime.getMinutes() + "분"}
+              </>
             )}
-            에서 {endTime}시 {RANDOM_ADD_TIME / 1000 / 60}분 사이
+            에서{" "}
+            {endTime.getDate() ===
+            new Date(endTime.getTime() + RANDOM_ADD_TIME).getDate()
+              ? ""
+              : format(
+                  new Date(endTime.getTime() + RANDOM_ADD_TIME),
+                  "M월 d일 ",
+                )}
+            {format(new Date(endTime.getTime() + RANDOM_ADD_TIME), "HH시")}
+            {new Date(endTime.getTime() + RANDOM_ADD_TIME).getMinutes() === 0
+              ? ""
+              : " " +
+                new Date(endTime.getTime() + RANDOM_ADD_TIME).getMinutes() +
+                "분"}{" "}
+            사이
           </span>
-          에 <span className="text-primary">무작위</span>로 결정됩니다.
+          에 <span className="text-primary font-bold">무작위</span>로
+          결정됩니다.
         </li>
       </List>
     </div>

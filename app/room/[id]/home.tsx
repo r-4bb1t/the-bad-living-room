@@ -126,10 +126,9 @@ export default function Home({ room }: { room: RoomType }) {
             children: (
               <div className="w-full flex flex-col gap-2">
                 <Setting
-                  date={new Date()}
                   isEdit={false}
-                  startHour={new Date(room.startTime).getHours()}
-                  endHour={new Date(room.endTime).getHours()}
+                  startTime={new Date(room.startTime)}
+                  endTime={new Date(room.endTime)}
                 />
                 <RoomRule />
               </div>

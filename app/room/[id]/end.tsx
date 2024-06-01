@@ -47,7 +47,7 @@ export default function End({ room }: { room: RoomType }) {
                 <Fragment key={`via-${index}`}>
                   <div className="flex flex-col gap-2 items-center relative w-12 text-primary">
                     <ChevronRight size={16} />
-                    <div className="absolute top-[calc(100%+2px)] break-keep text-center w-16 text-xs">
+                    <div className="absolute top-[calc(100%+2px)] break-keep text-center w-20 text-xs">
                       {bomb.text[index]}
                     </div>
                   </div>
@@ -67,7 +67,7 @@ export default function End({ room }: { room: RoomType }) {
               <>
                 <div className="flex flex-col gap-2 items-center relative w-24 text-primary">
                   <ChevronRight size={16} />
-                  <div className="absolute top-[calc(100%+2px)] break-keep text-center w-16 text-xs">
+                  <div className="absolute top-[calc(100%+2px)] break-keep text-center w-20 text-xs">
                     {bomb.text[bomb.via.length - 1]}
                   </div>
                 </div>

@@ -191,11 +191,12 @@ export const GET = async (
       description: "폭탄을 받은 횟수가 가장 적다.",
       userId: minBombUserId,
     });
-    end.awards.push({
-      title: "아차상",
-      description: "자신의 폭탄을 제일 많이 받았다.",
-      userId: maxRecursiveUserId,
-    });
+    if (maxCecursiveCnt > 0)
+      end.awards.push({
+        title: "아차상",
+        description: "자신의 폭탄을 제일 많이 받았다.",
+        userId: maxRecursiveUserId,
+      });
     if (maxSends)
       end.awards.push({
         title: "개악질상",

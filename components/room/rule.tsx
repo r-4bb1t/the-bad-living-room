@@ -10,10 +10,10 @@ export default function RoomRule() {
         <li>1시간마다 각자의 우편함에 폭탄이 들어옵니다.</li>
         <li>
           우편함에 들어온것은{" "}
-          <span className="text-primary">우편함 확인하기</span>를 해야만
-          우편함에서 폭탄함으로 넘어오며 확인이 가능합니다.
+          <span className="text-primary font-bold">우편함 확인하기</span>를
+          해야만 우편함에서 폭탄함으로 넘어오며 확인이 가능합니다.
           <div className="text-sm font-light mb-1">
-            <span className="text-primary">*</span> 우편함 확인하기는{" "}
+            <span className="text-primary font-bold">*</span> 우편함 확인하기는{" "}
             {POSTBOX_COOLTIME / 1000 / 60}분마다 가능합니다.
           </div>
         </li>
@@ -26,8 +26,10 @@ export default function RoomRule() {
         </li>
         <li>
           게임이 무작위로 종료되었을 때{" "}
-          <span className="text-primary">가장 많은 폭탄을 보유한 사람</span>이
-          패배합니다.
+          <span className="text-primary font-bold">
+            가장 많은 폭탄을 보유한 사람
+          </span>
+          이 패배합니다.
         </li>
       </List>
     </div>

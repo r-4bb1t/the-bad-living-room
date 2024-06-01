@@ -39,9 +39,8 @@ export default function Landing({ room }: { room: RoomType }) {
       </div>
       <Setting
         isEdit={false}
-        startHour={new Date(room.startTime).getHours()}
-        endHour={new Date(room.endTime).getHours()}
-        date={new Date(room.startTime)}
+        startTime={new Date(room.startTime)}
+        endTime={new Date(room.endTime)}
       />
       <RoomRule />
       <RoomButton roomId={room.id} userIds={room.users.map((u) => u.id)} />

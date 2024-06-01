@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 
 import { useRouter } from "next/navigation";
 
@@ -11,10 +11,20 @@ import { useUser } from "@/store/useUser";
 import { Button, useAlert } from "@r-4bb1t/rabbit-ui";
 
 export default function Home() {
-  const hour = new Date().getHours();
+  const now = useMemo(() => {
+    let n = new Date();
+    n.setMinutes(0);
+    n.setSeconds(0);
+    n.setMilliseconds(0);
+    return n;
+  }, []);
 
-  const [startHour, setStartHour] = useState(Math.min(hour + 1, 23));
-  const [endHour, setEndHour] = useState(Math.min(hour + 6, 24));
+  const [startTime, setStartTime] = useState<Date>(
+    new Date(now.getTime() + 1000 * 60 * 60),
+  );
+  const [endTime, setEndTime] = useState<Date>(
+    new Date(now.getTime() + 1000 * 60 * 60 * 3),
+  );
 
   const [loading, setLoading] = useState(false);
   const { openModal } = useAlert();
@@ -33,8 +43,8 @@ export default function Home() {
         method: "POST",
         body: JSON.stringify({
           ownerId: user?.id,
-          startTime: startHour,
-          endTime: endHour,
+          startTime,
+          endTime,
         }),
       });
       const { id: roomId } = await res.json();
@@ -47,7 +57,7 @@ export default function Home() {
       });
       setLoading(false);
     }
-  }, [user?.id, startHour, endHour, router, openModal]);
+  }, [user?.id, startTime, endTime, router, openModal]);
 
   useEffect(() => {
     if (!user) {
@@ -63,12 +73,11 @@ export default function Home() {
       </div>
       <Setting
         isEdit={true}
-        startHour={startHour}
-        endHour={endHour}
-        setStartHour={setStartHour}
-        setEndHour={setEndHour}
+        startTime={startTime}
+        endTime={endTime}
+        setStartTime={setStartTime}
+        setEndTime={setEndTime}
         loading={loading}
-        date={new Date()}
       />
       <RoomRule />
       <Button

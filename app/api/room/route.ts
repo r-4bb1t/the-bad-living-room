@@ -8,14 +8,8 @@ export const POST = async (req: Request) => {
   const prisma = new PrismaClient();
   const { ownerId, startTime, endTime } = await req.json();
 
-  let start = new Date();
-  start.setHours(startTime);
-  start.setMinutes(0);
-  start.setSeconds(0);
-  let end = new Date();
-  end.setHours(endTime);
-  end.setMinutes(0);
-  end.setSeconds(0);
+  let start = new Date(startTime);
+  let end = new Date(endTime);
 
   const room = await prisma.room.create({
     data: {

@@ -46,7 +46,9 @@ export default function RoomButton({
 
   return user ? (
     userIds.includes(user.id) ? (
-      <div>게임이 시작될 때까지 기다려 주세요.</div>
+      <div className="animate-pulse text-primary text-lg">
+        게임이 시작될 때까지 기다려 주세요.
+      </div>
     ) : (
       <Button onClick={handleEnter} loading={loading}>
         입장하기
