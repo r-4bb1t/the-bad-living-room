@@ -44,7 +44,7 @@ export default function Setting({
                 value={
                   format(startTime, "yyyy-MM-dd") +
                   "T" +
-                  format(startTime, "hh:mm")
+                  format(startTime, "HH:mm")
                 }
                 className="mr-2 text-primary"
               />
@@ -70,7 +70,7 @@ export default function Setting({
                 sz={"xs"}
                 onChange={(e) => setEndTime!(new Date(e.target.value))}
                 value={
-                  format(endTime, "yyyy-MM-dd") + "T" + format(endTime, "hh:mm")
+                  format(endTime, "yyyy-MM-dd") + "T" + format(endTime, "HH:mm")
                 }
                 className="mr-2 text-primary"
               />
