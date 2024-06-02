@@ -1,4 +1,4 @@
-import { BOMB_EXPIRE_TIME, POSTBOX_COOLTIME } from "@/constant";
+import { BOMB_COOLTIME, BOMB_EXPIRE_TIME, POSTBOX_COOLTIME } from "@/constant";
 
 import { List } from "@r-4bb1t/rabbit-ui";
 
@@ -7,7 +7,9 @@ export default function RoomRule() {
     <div className="p-4 rounded border border-primary border-dotted">
       <h2 className="font-bold text-primary mb-1">Rule</h2>
       <List marker="decimal" className="px-4 leading-7">
-        <li>1시간마다 각자의 우편함에 폭탄이 들어옵니다.</li>
+        <li>
+          {BOMB_COOLTIME / 1000 / 60}분마다 각자의 우편함에 폭탄이 들어옵니다.
+        </li>
         <li>
           우편함에 들어온것은{" "}
           <span className="text-primary font-bold">우편함 확인하기</span>를

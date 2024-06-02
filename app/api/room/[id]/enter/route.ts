@@ -1,3 +1,5 @@
+import { POSTBOX_COOLTIME } from "@/constant";
+
 import { PrismaClient } from "@prisma/client";
 
 export const POST = async (
@@ -40,7 +42,9 @@ export const POST = async (
             },
           },
           isAdmin: false,
-          lastVisit: new Date(room.startTime.getTime() - 1000 * 60 * 20),
+          lastVisit: new Date(
+            room.startTime.getTime() - POSTBOX_COOLTIME * 1.5,
+          ),
         },
       },
     },

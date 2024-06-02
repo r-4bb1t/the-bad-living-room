@@ -1,5 +1,6 @@
 import { nanoid } from "nanoid";
 
+import { BOMB_COOLTIME } from "@/constant";
 import { EndType } from "@/types/room";
 
 import { PrismaClient } from "@prisma/client";
@@ -96,10 +97,10 @@ export const GET = async (
         const lastVisit = uor.lastVisit;
         if (now.getHours() > uor.lastVisit.getHours()) {
           const allCnt = Math.floor(
-            (now.getTime() - startTime.getTime()) / (1000 * 60 * 60),
+            (now.getTime() - startTime.getTime()) / BOMB_COOLTIME,
           );
           const openedCnt = Math.floor(
-            (lastVisit.getTime() - startTime.getTime()) / (1000 * 60 * 60),
+            (lastVisit.getTime() - startTime.getTime()) / BOMB_COOLTIME,
           );
           for (let i = 0; i < allCnt - openedCnt; i++) {
             await prisma.bomb.create({
@@ -111,7 +112,7 @@ export const GET = async (
                 opened: false,
                 roomId: id,
                 time: new Date(
-                  startTime.getTime() + 1000 * 60 * 60 * (openedCnt + i + 1),
+                  startTime.getTime() + BOMB_COOLTIME * (openedCnt + i + 1),
                 ),
               },
             });

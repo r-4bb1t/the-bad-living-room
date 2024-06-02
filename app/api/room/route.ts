@@ -1,6 +1,6 @@
 import { nanoid } from "nanoid";
 
-import { RANDOM_ADD_TIME } from "@/constant";
+import { POSTBOX_COOLTIME, RANDOM_ADD_TIME } from "@/constant";
 
 import { PrismaClient } from "@prisma/client";
 
@@ -27,7 +27,7 @@ export const POST = async (req: Request) => {
             },
           },
           isAdmin: true,
-          lastVisit: new Date(start.getTime() - 1000 * 60 * 20),
+          lastVisit: new Date(start.getTime() - POSTBOX_COOLTIME * 1.5),
         },
       },
       startTime: start,
