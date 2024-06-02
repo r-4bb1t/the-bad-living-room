@@ -1,5 +1,4 @@
 import "./globals.css";
-import Share from "./share";
 import { Metadata } from "next";
 
 import Logo from "@/components/logo";
