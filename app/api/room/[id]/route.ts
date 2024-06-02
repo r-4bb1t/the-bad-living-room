@@ -84,7 +84,7 @@ export const GET = async (
     maxBombUserId = usersOnRoom[0].user.id,
     minBombCount = 1000000000,
     minBombUserId = usersOnRoom[0].user.id,
-    maxCecursiveCnt = 0,
+    maxRecursiveCnt = 0,
     maxRecursiveUserId = usersOnRoom[0].user.id;
 
   const startTime = room.startTime;
@@ -148,11 +148,14 @@ export const GET = async (
         where: {
           originalUserId: uor.user.id,
           ownerId: uor.user.id,
+          via: {
+            isEmpty: false,
+          },
         },
       });
 
-      if (recursiveCnt > maxCecursiveCnt) {
-        maxCecursiveCnt = recursiveCnt;
+      if (recursiveCnt > maxRecursiveCnt) {
+        maxRecursiveCnt = recursiveCnt;
         maxRecursiveUserId = uor.user.id;
       }
 
@@ -197,19 +200,19 @@ export const GET = async (
       description: "폭탄을 받은 횟수가 가장 적다.",
       userId: minBombUserId,
     });
-    if (maxCecursiveCnt > 0)
+    if (maxRecursiveCnt > 0)
       end.awards.push({
         title: "아차상",
         description: "자신의 폭탄을 제일 많이 받았다.",
         userId: maxRecursiveUserId,
       });
-    if (maxSends)
+    if (maxSends && maxSends.sends > 0)
       end.awards.push({
         title: "개악질상",
         description: "보낸 폭탄의 수가 가장 많다.",
         userId: maxSends.userId,
       });
-    if (maxVisits)
+    if (maxVisits && maxVisits.visits > 0)
       end.awards.push({
         title: "휴대폰 중독상",
         description: "우편함 갱신을 가장 많이 했다.",
