@@ -34,7 +34,7 @@ export default function Share() {
   return (
     <div className="fixed max-w-md w-full top-0 z-20 h-16 pointer-events-none">
       <div className="w-full h-full flex justify-end px-6 items-center">
-        {typeof navigator?.share === "function" ? (
+        {navigator && typeof navigator?.share === "function" ? (
           <Button
             square
             onClick={handleShareURL}
