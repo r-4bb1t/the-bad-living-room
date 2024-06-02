@@ -1,4 +1,5 @@
 import "./globals.css";
+import Share from "./share";
 import { Metadata } from "next";
 
 import Logo from "@/components/logo";
@@ -20,6 +21,7 @@ export default async function RootLayout({
       <body>
         <Layout mobileFirst>
           <Header logo={<Logo />} mobileFirst className="!px-4" />
+          <Share />
           {children}
         </Layout>
       </body>
