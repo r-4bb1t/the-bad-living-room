@@ -33,7 +33,6 @@ export const POST = async (
   const startTime = room.startTime;
 
   if (now.getTime() > lastVisit.getTime()) {
-    // startTime 기준으로 1시간에 1개씩 폭탄 생성
     const allCnt = Math.floor(
       (now.getTime() - startTime.getTime()) / (1000 * 60 * 60),
     );
@@ -50,12 +49,7 @@ export const POST = async (
           opened: false,
           roomId,
           time: new Date(
-            now.getFullYear(),
-            now.getMonth(),
-            now.getDate(),
-            startTime.getHours() + openedCnt + i + 1,
-            startTime.getMinutes(),
-            startTime.getSeconds(),
+            startTime.getTime() + 1000 * 60 * 60 * (openedCnt + i + 1),
           ),
         },
       });

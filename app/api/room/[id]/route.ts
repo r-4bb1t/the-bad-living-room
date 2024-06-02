@@ -111,12 +111,7 @@ export const GET = async (
                 opened: false,
                 roomId: id,
                 time: new Date(
-                  now.getFullYear(),
-                  now.getMonth(),
-                  now.getDate(),
-                  startTime.getHours() + openedCnt + i + 1,
-                  startTime.getMinutes(),
-                  startTime.getSeconds(),
+                  startTime.getTime() + 1000 * 60 * 60 * (openedCnt + i + 1),
                 ),
               },
             });
