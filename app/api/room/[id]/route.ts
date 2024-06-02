@@ -62,8 +62,6 @@ export const GET = async (
     },
   });
 
-  const now = new Date();
-
   const bombs = await prisma.bomb.findMany({
     where: {
       roomId: id,
@@ -91,7 +89,9 @@ export const GET = async (
 
   const startTime = room.startTime;
 
+  let now = new Date();
   if (now > new Date(room.realEndTime)) {
+    now = new Date(room.realEndTime);
     if (!room.ended) {
       usersOnRoom.forEach(async (uor) => {
         const lastVisit = uor.lastVisit;
