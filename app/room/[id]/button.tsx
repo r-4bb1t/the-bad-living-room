@@ -17,7 +17,6 @@ export default function RoomButton({
   roomId: string;
 }) {
   const { user } = useUser();
-  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const { openModal } = useAlert();
 
@@ -32,7 +31,7 @@ export default function RoomButton({
         },
         body: JSON.stringify({ userId: user.id }),
       });
-      router.replace(`/room/${roomId}`);
+      window.location.reload();
     } catch (e) {
       openModal({
         children: "입장에 실패했습니다. 다시 시도해주세요.",
@@ -42,7 +41,7 @@ export default function RoomButton({
     } finally {
       setLoading(false);
     }
-  }, [openModal, roomId, router, user]);
+  }, [openModal, roomId, user]);
 
   return user ? (
     userIds.includes(user.id) ? (
