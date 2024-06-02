@@ -160,7 +160,7 @@ const Modal = ({
         }
       />
       <div className="text-sm">
-        {format(new Date(bomb.time), "hh시 mm분 ss초에 도착함")}
+        {format(new Date(bomb.time), "H시 m분 s초에 도착함")}
       </div>
       {new Date().getTime() - new Date(bomb.time).getTime() <
       BOMB_EXPIRE_TIME ? (
