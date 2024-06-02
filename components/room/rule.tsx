@@ -11,7 +11,7 @@ export default function RoomRule() {
           {BOMB_COOLTIME / 1000 / 60}분마다 각자의 우편함에 폭탄이 들어옵니다.
         </li>
         <li>
-          우편함에 들어온것은{" "}
+          우편함에 들어온 폭탄은{" "}
           <span className="text-primary font-bold">우편함 확인하기</span>를
           해야만 우편함에서 폭탄함으로 넘어오며 확인이 가능합니다.
           <div className="text-sm font-light mb-1">
