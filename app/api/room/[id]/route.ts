@@ -224,9 +224,9 @@ export const GET = async (
     startTime: room.startTime,
     endTime: room.endTime,
     status:
-      now < new Date(room.startTime)
+      new Date() < new Date(room.startTime)
         ? "waiting"
-        : now < new Date(room.realEndTime)
+        : new Date() < new Date(room.realEndTime)
           ? "playing"
           : "end",
     users: room.UsersOnRooms.map((userOnRoom) => ({

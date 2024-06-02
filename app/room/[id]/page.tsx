@@ -5,13 +5,11 @@ import { useCallback, useEffect, useState } from "react";
 import End from "./end";
 import Home from "./home";
 import Landing from "./landing";
-import { useRouter } from "next/navigation";
 
 import { RoomType } from "@/types/room";
 
 export default function Room({ params: { id } }: { params: { id: string } }) {
   const [room, setRoom] = useState<RoomType | null>(null);
-  const router = useRouter();
 
   const getRoomData = useCallback(async () => {
     const res = await fetch(`/api/room/${id}`, {
@@ -19,7 +17,7 @@ export default function Room({ params: { id } }: { params: { id: string } }) {
     });
     const data = await res.json();
     setRoom(data);
-  }, [id, router]);
+  }, [id, setRoom]);
 
   useEffect(() => {
     getRoomData();
