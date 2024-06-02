@@ -88,12 +88,20 @@ export const GET = async (
     maxCecursiveCnt = 0,
     maxRecursiveUserId = usersOnRoom[0].user.id;
 
+  const startTime = room.startTime;
+
   if (now > new Date(room.realEndTime)) {
     if (!room.ended) {
       usersOnRoom.forEach(async (uor) => {
+        const lastVisit = uor.lastVisit;
         if (now.getHours() > uor.lastVisit.getHours()) {
-          const count = now.getHours() - uor.lastVisit.getHours();
-          for (let i = 0; i < count; i++) {
+          const allCnt = Math.floor(
+            (now.getTime() - startTime.getTime()) / (1000 * 60 * 60),
+          );
+          const openedCnt = Math.floor(
+            (lastVisit.getTime() - startTime.getTime()) / (1000 * 60 * 60),
+          );
+          for (let i = 0; i < allCnt - openedCnt; i++) {
             await prisma.bomb.create({
               data: {
                 id: nanoid(),
@@ -106,7 +114,9 @@ export const GET = async (
                   now.getFullYear(),
                   now.getMonth(),
                   now.getDate(),
-                  uor.lastVisit.getHours() + i + 1,
+                  startTime.getHours() + openedCnt + i + 1,
+                  startTime.getMinutes(),
+                  startTime.getSeconds(),
                 ),
               },
             });

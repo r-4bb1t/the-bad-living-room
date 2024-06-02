@@ -17,7 +17,11 @@ export const POST = async (
     where: { roomId, userId },
   });
 
-  if (!userOnRoom || !user) {
+  const room = await prisma.room.findUnique({
+    where: { id: roomId },
+  });
+
+  if (!userOnRoom || !user || !room) {
     // await prisma.$disconnect();
     return Response.json({
       error: "User is not in the room",
@@ -26,12 +30,17 @@ export const POST = async (
 
   const now = new Date();
   const lastVisit = userOnRoom.lastVisit;
+  const startTime = room.startTime;
 
-  console.log(lastVisit, now, lastVisit.getHours(), now.getHours());
-
-  if (now.getHours() > lastVisit.getHours()) {
-    const count = now.getHours() - lastVisit.getHours();
-    for (let i = 0; i < count; i++) {
+  if (now.getTime() > lastVisit.getTime()) {
+    // startTime 기준으로 1시간에 1개씩 폭탄 생성
+    const allCnt = Math.floor(
+      (now.getTime() - startTime.getTime()) / (1000 * 60 * 60),
+    );
+    const openedCnt = Math.floor(
+      (lastVisit.getTime() - startTime.getTime()) / (1000 * 60 * 60),
+    );
+    for (let i = 0; i < allCnt - openedCnt; i++) {
       await prisma.bomb.create({
         data: {
           id: nanoid(),
@@ -44,7 +53,9 @@ export const POST = async (
             now.getFullYear(),
             now.getMonth(),
             now.getDate(),
-            lastVisit.getHours() + i + 1,
+            startTime.getHours() + openedCnt + i + 1,
+            startTime.getMinutes(),
+            startTime.getSeconds(),
           ),
         },
       });

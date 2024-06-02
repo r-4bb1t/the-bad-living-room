@@ -150,7 +150,7 @@ export default function Home({ room }: { room: RoomType }) {
       >
         규칙 보기
       </Button>
-      <div className="flex w-full justify-center flex-wrap gap-x-4">
+      <div className="flex w-full justify-center flex-wrap gap-x-2">
         {room.users.map((user) => (
           <Bomb small stop src={user.photo} key={user.id} />
         ))}
