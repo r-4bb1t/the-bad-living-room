@@ -23,7 +23,7 @@ function Kakao() {
 
   const handleAuthCode = useCallback(async (code: string) => {
     try {
-      const res = await fetch("/api/auth", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_HOST}/api/auth`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,7 +51,7 @@ function Kakao() {
     if (!user) return;
     setLoading(true);
     try {
-      await fetch("/api/auth", {
+      await fetch(`${process.env.NEXT_PUBLIC_APP_HOST}/api/auth`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",

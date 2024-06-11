@@ -36,7 +36,7 @@ export default function Home() {
   const handleCreateRoom = useCallback(async () => {
     setLoading(true);
     try {
-      const res = await fetch("/api/room", {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_HOST}/api/room`, {
         headers: {
           "Content-Type": "application/json",
         },
