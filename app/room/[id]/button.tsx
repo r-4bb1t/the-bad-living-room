@@ -24,13 +24,16 @@ export default function RoomButton({
     if (!user) return;
     setLoading(true);
     try {
-      await fetch(`/api/room/${roomId}/enter`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
+      await fetch(
+        `${process.env.NEXT_PUBLIC_APP_HOST}/api/room/${roomId}/enter`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ userId: user.id }),
         },
-        body: JSON.stringify({ userId: user.id }),
-      });
+      );
       window.location.reload();
     } catch (e) {
       openModal({
