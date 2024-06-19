@@ -101,7 +101,7 @@ const Modal = ({
     if (!user) return;
     try {
       setLoading(true);
-      const res = await fetch(`/api/bomb`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_APP_HOST}/api/bomb`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

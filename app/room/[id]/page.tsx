@@ -12,9 +12,12 @@ export default function Room({ params: { id } }: { params: { id: string } }) {
   const [room, setRoom] = useState<RoomType | null>(null);
 
   const getRoomData = useCallback(async () => {
-    const res = await fetch(`/api/room/${id}`, {
-      cache: "no-cache",
-    });
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_APP_HOST}/api/room/${id}`,
+      {
+        cache: "no-cache",
+      },
+    );
     const data = await res.json();
     setRoom(data);
   }, [id, setRoom]);

@@ -33,7 +33,9 @@ export default function Home({ room }: { room: RoomType }) {
     if (!user) return;
     setLoading(true);
     try {
-      const res = await fetch(`/api/room/${room.id}/${user!.id}`);
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_HOST}/api/room/${room.id}/${user!.id}`,
+      );
       const { bombs: all, lastVisit: lv } = (await res.json()) as {
         bombs: BombType[];
         lastVisit: string;
@@ -61,9 +63,12 @@ export default function Home({ room }: { room: RoomType }) {
     if (!user) return;
     setOpenLoading(true);
     try {
-      const res = await fetch(`/api/room/${room.id}/${user!.id}/open`, {
-        method: "POST",
-      });
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_APP_HOST}/api/room/${room.id}/${user!.id}/open`,
+        {
+          method: "POST",
+        },
+      );
       const { bombs: opened } = (await res.json()) as { bombs: BombType[] };
       if (opened.length === 0) {
         addToast({
